@@ -32,7 +32,7 @@ function App() {
           size="lg"
           alignSelf="flex-end"
           onClick={toggleColorMode}
-          position="fixed"
+          // position="fixed"
         />
         <Heading
           fontWeight="extrabold"
