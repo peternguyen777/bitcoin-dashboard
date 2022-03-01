@@ -17,6 +17,11 @@ import React from "react";
 function App() {
   const { colorMode, toggleColorMode } = useColorMode();
 
+  const labelStyle = {
+    display: "flex",
+    alignItems: "center",
+  };
+
   return (
     <React.Fragment>
       <VStack p={4}>
@@ -44,9 +49,9 @@ function App() {
         </Heading>
         <Container pt={12}>
           <PriceStats />
-          <MarketStats />
-          <TradingStats />
-          <MiningStats />
+          <MarketStats styles={labelStyle} />
+          <TradingStats styles={labelStyle} />
+          <MiningStats styles={labelStyle} />
         </Container>
       </VStack>
     </React.Fragment>
