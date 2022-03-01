@@ -1,4 +1,3 @@
-import "./App.css";
 import {
   Heading,
   VStack,
@@ -11,6 +10,7 @@ import PriceStats from "./Components/Layout/PriceStats";
 import MarketStats from "./Components/Layout/MarketStats";
 import TradingStats from "./Components/Layout/TradingStats";
 import MiningStats from "./Components/Layout/MiningStats";
+import LnStats from "./Components/Layout/LnStats";
 import React from "react";
 
 function App() {
@@ -36,7 +36,6 @@ function App() {
           size="lg"
           alignSelf="flex-end"
           onClick={toggleColorMode}
-          // position="fixed"
         />
 
         <Heading
@@ -50,8 +49,9 @@ function App() {
         <Container pt={12}>
           <PriceStats />
           <MarketStats styles={labelStyle} />
-          <TradingStats styles={labelStyle} />
+          <LnStats styles={labelStyle} />
           <MiningStats styles={labelStyle} />
+          <TradingStats styles={labelStyle} />
         </Container>
       </VStack>
     </React.Fragment>

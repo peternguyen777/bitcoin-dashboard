@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
-import { MiningIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
+import { BlockIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 
 const MiningStats = (props) => {
   const [miningData, setMiningData] = useState([]);
@@ -49,8 +49,8 @@ const MiningStats = (props) => {
       <Thead>
         <Tr>
           <Th style={props.styles}>
-            <MiningIcon style={{ height: "20px", width: "20px" }} />
-            Mining Data
+            <BlockIcon style={{ height: "20px", width: "20px" }} />
+            <h2>Blockchain Data</h2>
           </Th>
           <Th></Th>
         </Tr>
