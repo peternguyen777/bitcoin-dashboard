@@ -23,6 +23,9 @@ const MiningStats = (props) => {
         fetch("https://blockchain.info/q/hashrate").then((response) =>
           response.json()
         ),
+        fetch("https://mempool.space/api/v1/difficulty-adjustment").then(
+          (response) => response.json()
+        ),
       ]);
 
       const transformedMiningData = {
@@ -31,6 +34,8 @@ const MiningStats = (props) => {
         interval: (data[2] / 60).toFixed(2),
         hashesToWin: data[3].toPrecision(3),
         hashRate: (data[4] / 1e9).toFixed(2),
+        diffAdj: data[5].difficultyChange.toFixed(2),
+        nextRetarg: data[5].nextRetargetHeight.toLocaleString("en-US"),
       };
 
       setMiningData(transformedMiningData);
@@ -52,16 +57,20 @@ const MiningStats = (props) => {
       </Thead>
       <Tbody>
         <Tr>
-          <Td>Hash Rate</Td>
-          <Td isNumeric>{miningData.hashRate} EH</Td>
+          <Td>Hash Rate (last 24h)</Td>
+          <Td isNumeric>{miningData.hashRate} EH/s</Td>
         </Tr>
         <Tr>
           <Td>Block Height</Td>
           <Td isNumeric>{miningData.blockHeight}</Td>
         </Tr>
         <Tr>
-          <Td>Block Reward</Td>
-          <Td isNumeric>{miningData.btcPerBlock} BTC</Td>
+          <Td>Next Retarget Height</Td>
+          <Td isNumeric>{miningData.nextRetarg}</Td>
+        </Tr>
+        <Tr>
+          <Td>Estimated Difficulty Adjustment</Td>
+          <Td isNumeric>{miningData.diffAdj}%</Td>
         </Tr>
         <Tr>
           <Td>Average Interval between Blocks</Td>
@@ -70,6 +79,10 @@ const MiningStats = (props) => {
         <Tr>
           <Td>Average Hash Attempts per Block</Td>
           <Td isNumeric>{miningData.hashesToWin}</Td>
+        </Tr>
+        <Tr>
+          <Td>Block Reward</Td>
+          <Td isNumeric>{miningData.btcPerBlock} BTC</Td>
         </Tr>
       </Tbody>
     </Table>

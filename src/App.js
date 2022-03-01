@@ -7,7 +7,6 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 import { SunIcon, MoonIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
-
 import PriceStats from "./Components/Layout/PriceStats";
 import MarketStats from "./Components/Layout/MarketStats";
 import TradingStats from "./Components/Layout/TradingStats";
@@ -39,6 +38,7 @@ function App() {
           onClick={toggleColorMode}
           // position="fixed"
         />
+
         <Heading
           fontWeight="extrabold"
           size="2xl"

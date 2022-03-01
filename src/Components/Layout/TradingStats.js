@@ -29,7 +29,7 @@ const TradingStats = (props) => {
         dayLow: data.market_data.low_24h.usd.toLocaleString("en-US"),
         ath: data.market_data.ath.usd.toLocaleString("en-US"),
         athDate: formatDate(dataAthDate),
-        athChange: data.market_data.ath_change_percentage.usd,
+        athChange: data.market_data.ath_change_percentage.usd.toFixed(2),
       };
 
       setTradingData(transformedTradingData);
