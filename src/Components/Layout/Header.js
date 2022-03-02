@@ -25,7 +25,7 @@ function Header(props) {
           bgGradient="linear(to-r, yellow.500,orange.400, red.400)"
           bgClip="text"
         >
-          Bitcoin Dashboard
+          ₿itcoin Dashboard
         </Heading>
       </Box>
       <Spacer />
