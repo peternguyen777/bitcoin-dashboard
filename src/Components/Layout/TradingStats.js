@@ -21,22 +21,29 @@ const TradingStats = (props) => {
         return date;
       };
 
+      const selectedCurrency = props.currency.code.toLowerCase();
+
       const transformedTradingData = {
         id: data.id,
         dayTradingVol:
-          data.market_data.total_volume.usd.toLocaleString("en-US"),
-        dayHigh: data.market_data.high_24h.usd.toLocaleString("en-US"),
-        dayLow: data.market_data.low_24h.usd.toLocaleString("en-US"),
-        ath: data.market_data.ath.usd.toLocaleString("en-US"),
+          data.market_data.total_volume[selectedCurrency].toLocaleString(
+            "en-US"
+          ),
+        dayHigh:
+          data.market_data.high_24h[selectedCurrency].toLocaleString("en-US"),
+        dayLow:
+          data.market_data.low_24h[selectedCurrency].toLocaleString("en-US"),
+        ath: data.market_data.ath[selectedCurrency].toLocaleString("en-US"),
         athDate: formatDate(dataAthDate),
-        athChange: data.market_data.ath_change_percentage.usd.toFixed(2),
+        athChange:
+          data.market_data.ath_change_percentage[selectedCurrency].toFixed(2),
       };
 
       setTradingData(transformedTradingData);
     };
 
     fetchTradingDataHandler();
-  }, []);
+  }, [props.currency]);
 
   // let dateTimeUTC = new Date(tradingData.athDate);
   // let date = dateTimeUTC.toDateString();
@@ -56,19 +63,31 @@ const TradingStats = (props) => {
       <Tbody>
         <Tr>
           <Td>24 Hour Trading Volume</Td>
-          <Td isNumeric>${tradingData.dayTradingVol}</Td>
+          <Td isNumeric>
+            {props.currency.symbol}
+            {tradingData.dayTradingVol}
+          </Td>
         </Tr>
         <Tr>
           <Td>24 Hour High</Td>
-          <Td isNumeric>${tradingData.dayHigh}</Td>
+          <Td isNumeric>
+            {props.currency.symbol}
+            {tradingData.dayHigh}
+          </Td>
         </Tr>
         <Tr>
           <Td>24 Hour Low</Td>
-          <Td isNumeric>${tradingData.dayLow}</Td>
+          <Td isNumeric>
+            {props.currency.symbol}
+            {tradingData.dayLow}
+          </Td>
         </Tr>
         <Tr>
           <Td>All Time High</Td>
-          <Td isNumeric>${tradingData.ath}</Td>
+          <Td isNumeric>
+            {props.currency.symbol}
+            {tradingData.ath}
+          </Td>
         </Tr>
         <Tr>
           <Td>All Time High Date</Td>

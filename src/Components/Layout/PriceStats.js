@@ -34,6 +34,7 @@ const PriceStats = () => {
     rangeSelector: {
       floating: false,
       inputEnabled: false,
+      // selected: 4,
       buttonTheme: {
         fill: "none",
         stroke: "none",
@@ -84,11 +85,13 @@ const PriceStats = () => {
     ],
   };
   return (
-    <HighchartsReact
-      highcharts={Highcharts}
-      constructorType={"stockChart"}
-      options={options}
-    />
+    <React.Fragment>
+      <HighchartsReact
+        highcharts={Highcharts}
+        constructorType={"stockChart"}
+        options={options}
+      />
+    </React.Fragment>
   );
 };
 

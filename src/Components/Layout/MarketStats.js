@@ -13,17 +13,24 @@ const MarketStats = (props) => {
 
       const data = await response.json();
 
+      const selectedCurrency = props.currency.code.toLowerCase();
+
       const transformedMarketData = {
         id: data.id,
         title: data.name,
-        currentPriceUsd:
-          data.market_data.current_price.usd.toLocaleString("en-US"),
+        currentPrice:
+          data.market_data.current_price[selectedCurrency].toLocaleString(
+            "en-US"
+          ),
         satsPerDollar: Math.round(
-          100000000 / data.market_data.current_price.usd
+          100000000 / data.market_data.current_price[selectedCurrency]
         ),
-        marketCapUsd: data.market_data.market_cap.usd.toLocaleString("en-US"),
+        marketCapUsd:
+          data.market_data.market_cap[selectedCurrency].toLocaleString("en-US"),
         fullyDilutedVal:
-          data.market_data.fully_diluted_valuation.usd.toLocaleString("en-US"),
+          data.market_data.fully_diluted_valuation[
+            selectedCurrency
+          ].toLocaleString("en-US"),
         circulatingSupply:
           data.market_data.circulating_supply.toLocaleString("en-US"),
         maxSupply: data.market_data.max_supply.toLocaleString("en-US"),
@@ -33,7 +40,7 @@ const MarketStats = (props) => {
     };
 
     fetchMarketDataHandler();
-  }, []);
+  }, [props.currency]);
 
   return (
     <Table size="sm" variant="simple" mt={12} mb={8}>
@@ -48,20 +55,29 @@ const MarketStats = (props) => {
       </Thead>
       <Tbody>
         <Tr>
-          <Td>Current Price (USD)</Td>
-          <Td isNumeric>${marketData.currentPriceUsd}</Td>
+          <Td>Current Price</Td>
+          <Td isNumeric>
+            {props.currency.symbol}
+            {marketData.currentPrice}
+          </Td>
         </Tr>
         <Tr>
-          <Td>Sats per dollar</Td>
+          <Td>Sats per {props.currency.code}</Td>
           <Td isNumeric>{marketData.satsPerDollar}</Td>
         </Tr>
         <Tr>
           <Td>Market Cap</Td>
-          <Td isNumeric>${marketData.marketCapUsd}</Td>
+          <Td isNumeric>
+            {props.currency.symbol}
+            {marketData.marketCapUsd}
+          </Td>
         </Tr>
         <Tr>
           <Td>Fully Diluted Valuation</Td>
-          <Td isNumeric>${marketData.fullyDilutedVal}</Td>
+          <Td isNumeric>
+            {props.currency.symbol}
+            {marketData.fullyDilutedVal}
+          </Td>
         </Tr>
         <Tr>
           <Td>Circulating Supply</Td>
