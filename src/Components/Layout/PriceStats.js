@@ -2,26 +2,26 @@ import Highcharts from "highcharts/highstock";
 import HighchartsReact from "highcharts-react-official";
 import React, { useState, useEffect } from "react";
 
-const PriceStats = () => {
+const PriceStats = (props) => {
   const [chartData, setChartData] = useState([]);
 
   useEffect(() => {
     const fetchChartDataHandler = async () => {
+      const selectedCurrency = await props.currency.code.toLowerCase();
       const response = await fetch(
-        "https://pacific-hollows-07478.herokuapp.com/https://api.blockchain.info/charts/market-price?timespan=5years"
+        `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=${selectedCurrency}&days=2200&interval=daily`
       );
 
       const data = await response.json();
 
-      const transformedChartData = data.values.map((datePrice) => [
-        datePrice.x * 1000,
-        datePrice.y,
-      ]);
+      // const lastItem = data.prices.length - 2;
+      // const lastDate = data.prices[lastItem][0];
+      // const lastDateYear = lastDate - 31536000000;
 
-      setChartData(transformedChartData);
+      setChartData(data.prices);
     };
     fetchChartDataHandler();
-  }, []);
+  }, [props.currency]);
 
   const options = {
     chart: {
@@ -32,9 +32,48 @@ const PriceStats = () => {
       maskFill: "rgba(173, 173, 173, 0.35)",
     },
     rangeSelector: {
+      enabled: true,
+      allButtonsEnabled: true,
       floating: false,
       inputEnabled: false,
-      // selected: 4,
+      buttons: [
+        {
+          type: "week",
+          count: 1,
+          text: "1w",
+          title: "View 1 week",
+        },
+        {
+          type: "month",
+          count: 1,
+          text: "1m",
+          title: "View 1 month",
+        },
+        {
+          type: "month",
+          count: 6,
+          text: "6m",
+          title: "View 6 months",
+        },
+        {
+          type: "year",
+          count: 1,
+          text: "1y",
+          title: "View 1 year",
+        },
+        {
+          type: "year",
+          count: 4,
+          text: "4y",
+          title: "View 4 year",
+        },
+        {
+          type: "all",
+          text: "All",
+          title: "View all",
+        },
+      ],
+      // selected: 2,
       buttonTheme: {
         fill: "none",
         stroke: "none",
@@ -66,16 +105,21 @@ const PriceStats = () => {
     tooltip: {
       enabled: false,
     },
-    xAxis: {
-      crosshair: false,
-    },
+    // xAxis: [
+    //   {
+    //     // crosshair: false,
+    //     events: {
+    //       setExtremes({lastDateYear, lastDate})
+    //     },
+    //   },
+    // ],
     yAxis: {
       labels: {
         // eslint-disable-next-line
-        format: "${text}", // The $ is literally a dollar unit
+        format: `${props.currency.symbol}{text}`, // The $ is literally a dollar unit
       },
       title: {
-        text: "BTC-USD",
+        text: `BTC-${props.currency.code}`,
       },
     },
     series: [

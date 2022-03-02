@@ -10,16 +10,14 @@ function Header(props) {
   const { colorMode, toggleColorMode } = useColorMode();
 
   const FiatClickHandler = (event) => {
-    // console.log(event.target.value);
     const newCurrency = props.currencylist[event.target.value];
     props.setCurrency(newCurrency);
   };
 
   const currencyListArray = Object.values(props.currencylist);
-  // console.log(currencyListArray);
 
   return (
-    <Flex p={4}>
+    <Flex p={4} alignItems="center">
       <Box>
         <Heading
           fontWeight="extrabold"

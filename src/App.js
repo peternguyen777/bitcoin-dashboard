@@ -11,21 +11,15 @@ import Header from "./Components/Layout/Header";
 const currencies = {
   AUD: { code: "AUD", name: "Australian Dollar", symbol: "$" },
   CNY: { code: "CNY", name: "Chinese Yuan Renminbi", symbol: "¥" },
+  EUR: { code: "EUR", name: "European Euro", symbol: "€" },
   GBP: { code: "GBP", name: "United Kingdom Pound", symbol: "£" },
   JPY: { code: "JPY", name: "Japanese Yen", symbol: "¥" },
+  RUB: { code: "RUB", name: "Russian Ruble", symbol: "₽" },
   USD: { code: "USD", name: "United States Dollar", symbol: "$" },
 };
 
 function App() {
   const [selectedFiat, setSelectedFiat] = useState(currencies.USD);
-
-  // const currencies = [
-  //   { code: "AUD", name: "Australian Dollar", symbol: "$" },
-  //   { code: "CNY", name: "Chinese Yuan Renminbi", symbol: "¥" },
-  //   { code: "GBP", name: "United Kingdom Pound", symbol: "£" },
-  //   { code: "JPY", name: "Japanese Yen", symbol: "¥" },
-  //   { code: "USD", name: "United States Dollar", symbol: "$" },
-  // ];
 
   const labelStyle = {
     display: "flex",
@@ -40,14 +34,6 @@ function App() {
         setCurrency={setSelectedFiat}
       />
       <VStack p={4}>
-        {/* <Heading
-          fontWeight="extrabold"
-          size="2xl"
-          bgGradient="linear(to-r, yellow.500,orange.400, red.400)"
-          bgClip="text"
-        >
-          Bitcoin Dashboard
-        </Heading> */}
         <Container>
           <PriceStats currency={selectedFiat} />
           <MarketStats styles={labelStyle} currency={selectedFiat} />
