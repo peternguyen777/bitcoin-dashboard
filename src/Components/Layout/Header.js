@@ -21,7 +21,7 @@ function Header(props) {
       <Box>
         <Heading
           fontWeight="extrabold"
-          size="lg"
+          size="md"
           bgGradient="linear(to-r, yellow.500,orange.400, red.400)"
           bgClip="text"
         >
