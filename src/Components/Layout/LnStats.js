@@ -38,8 +38,8 @@ const LnStats = (props) => {
         }),
 
         avgNodeCap: data[0].averagenodecapacity.toFixed(2),
-        avgNodeCapUsd: (
-          data[0].averagenodecapacityusd *
+        avgNodeCapFiat: (
+          data[0].averagenodecapacity *
           data[1].market_data.current_price[selectedCurrency]
         ).toLocaleString("en-US", {
           maximumFractionDigits: 0,
@@ -54,7 +54,7 @@ const LnStats = (props) => {
   }, [props.currency]);
 
   return (
-    <Table size="sm" variant="simple" mb={8}>
+    <Table size='sm' variant='simple' mb={8}>
       <Thead>
         <Tr>
           <Th style={props.styles}>
@@ -92,7 +92,7 @@ const LnStats = (props) => {
           <Td>Average Node Capacity ({props.currency.code})</Td>
           <Td isNumeric>
             {props.currency.symbol}
-            {lnData.avgNodeCapUsd}
+            {lnData.avgNodeCapFiat}
           </Td>
         </Tr>
         <Tr>
