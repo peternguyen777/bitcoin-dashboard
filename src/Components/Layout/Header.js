@@ -17,7 +17,7 @@ function Header(props) {
   const currencyListArray = Object.values(props.currencylist);
 
   return (
-    <Flex p={{ base: 4, md: 8 }} alignItems='center'>
+    <Flex p={{ base: 6, md: 8 }} alignItems='center'>
       <Box>
         <Heading
           fontWeight='extrabold'

@@ -31,6 +31,7 @@ function App() {
   const [marketData, setMarketData] = useState([]);
   const [lnData, setLnData] = useState([]);
   const [miningData, setMiningData] = useState([]);
+  const [tradingData, setTradingData] = useState([]);
 
   useEffect(() => {
     setIsLoadingPrice(true);
@@ -181,8 +182,6 @@ function App() {
     fetchMiningDataHandler();
   }, [setIsLoadingMining]);
 
-  const [tradingData, setTradingData] = useState([]);
-
   useEffect(() => {
     setIsLoadingTrading(true);
     const fetchTradingDataHandler = async () => {
@@ -269,7 +268,7 @@ function App() {
       {isLoading ? (
         <LoadingSpinner />
       ) : (
-        <VStack p={4}>
+        <VStack p={2}>
           <Container>
             <PriceStats chartData={chartData} currency={selectedFiat} />
             <MarketStats
