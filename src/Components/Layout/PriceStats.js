@@ -85,14 +85,7 @@ const PriceStats = ({ currency, chartData }) => {
     tooltip: {
       enabled: false,
     },
-    // xAxis: [
-    //   {
-    //     // crosshair: false,
-    //     events: {
-    //       setExtremes({lastDateYear, lastDate})
-    //     },
-    //   },
-    // ],
+
     yAxis: {
       labels: {
         // eslint-disable-next-line

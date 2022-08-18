@@ -17,7 +17,7 @@ const MiningStats = ({ styles, miningData }) => {
       <Tbody>
         <Tr>
           <Td>Hash Rate (last 24h)</Td>
-          <Td isNumeric>{miningData.hashRate} EH/s</Td>
+          <Td isNumeric>{miningData.hashRate}EH/s</Td>
         </Tr>
         <Tr>
           <Td>Block Height</Td>
