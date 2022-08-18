@@ -17,13 +17,13 @@ function Header(props) {
   const currencyListArray = Object.values(props.currencylist);
 
   return (
-    <Flex p={4} alignItems="center">
+    <Flex px={8} py={4} alignItems='center'>
       <Box>
         <Heading
-          fontWeight="extrabold"
-          size="md"
-          bgGradient="linear(to-r, yellow.500,orange.400, red.400)"
-          bgClip="text"
+          fontWeight='extrabold'
+          size='md'
+          bgGradient='linear(to-r, yellow.500,orange.400, red.400)'
+          bgClip='text'
         >
           ₿itcoin Dashboard
         </Heading>
@@ -34,7 +34,7 @@ function Header(props) {
           <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
             {props.currency}
           </MenuButton>
-          <MenuList minW="0" w={"90px"}>
+          <MenuList minW='0' w={"90px"}>
             {currencyListArray.map((fiat) => (
               <MenuItem
                 onClick={FiatClickHandler}
@@ -55,7 +55,7 @@ function Header(props) {
               <MoonIcon style={{ height: "30px", width: "30px" }} />
             )
           }
-          size="md"
+          size='md'
           onClick={toggleColorMode}
         />
       </Box>

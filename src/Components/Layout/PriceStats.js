@@ -1,28 +1,8 @@
 import Highcharts from "highcharts/highstock";
 import HighchartsReact from "highcharts-react-official";
-import React, { useState, useEffect } from "react";
+import React from "react";
 
-const PriceStats = (props) => {
-  const [chartData, setChartData] = useState([]);
-
-  useEffect(() => {
-    const fetchChartDataHandler = async () => {
-      const selectedCurrency = await props.currency.code.toLowerCase();
-      const response = await fetch(
-        `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=${selectedCurrency}&days=2200&interval=daily`
-      );
-
-      const data = await response.json();
-
-      // const lastItem = data.prices.length - 2;
-      // const lastDate = data.prices[lastItem][0];
-      // const lastDateYear = lastDate - 31536000000;
-
-      setChartData(data.prices);
-    };
-    fetchChartDataHandler();
-  }, [props.currency]);
-
+const PriceStats = ({ currency, chartData }) => {
   const options = {
     chart: {
       backgroundColor: "transparent",
@@ -116,10 +96,10 @@ const PriceStats = (props) => {
     yAxis: {
       labels: {
         // eslint-disable-next-line
-        format: `${props.currency.symbol}{text}`, // The $ is literally a dollar unit
+        format: `${currency.symbol}{text}`, // The $ is literally a dollar unit
       },
       title: {
-        text: `BTC-${props.currency.code}`,
+        text: `BTC-${currency.code}`,
       },
     },
     series: [

@@ -1,54 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
 import { BlockIcon } from "@bitcoin-design/bitcoin-icons-react/filled";
 
-const MiningStats = (props) => {
-  const [miningData, setMiningData] = useState([]);
-
-  useEffect(() => {
-    const fetchMiningDataHandler = async () => {
-      const data = await Promise.all([
-        fetch("https://blockchain.info/q/getblockcount").then((response) =>
-          response.json()
-        ),
-        fetch("https://blockchain.info/q/bcperblock").then((response) =>
-          response.json()
-        ),
-        fetch("https://blockchain.info/q/interval").then((response) =>
-          response.json()
-        ),
-        fetch("https://blockchain.info/q/hashestowin").then((response) =>
-          response.json()
-        ),
-        fetch("https://blockchain.info/q/hashrate").then((response) =>
-          response.json()
-        ),
-        fetch("https://mempool.space/api/v1/difficulty-adjustment").then(
-          (response) => response.json()
-        ),
-      ]);
-
-      const transformedMiningData = {
-        blockHeight: data[0].toLocaleString("en-US"),
-        btcPerBlock: data[1],
-        interval: (data[2] / 60).toFixed(2),
-        hashesToWin: data[3].toPrecision(3),
-        hashRate: (data[4] / 1e9).toFixed(2),
-        diffAdj: data[5].difficultyChange.toFixed(2),
-        nextRetarg: data[5].nextRetargetHeight.toLocaleString("en-US"),
-      };
-
-      setMiningData(transformedMiningData);
-    };
-
-    fetchMiningDataHandler();
-  }, []);
-
+const MiningStats = ({ styles, miningData }) => {
   return (
-    <Table size="sm" variant="simple" mb={8}>
+    <Table size='sm' variant='simple' mb={8}>
       <Thead>
         <Tr>
-          <Th style={props.styles}>
+          <Th style={styles}>
             <BlockIcon style={{ height: "20px", width: "20px" }} />
             <h2>Blockchain Data</h2>
           </Th>
